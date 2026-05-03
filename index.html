@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>yiayia — restaurant — Angoulême</title>
+  <meta name="description" content="Découvrez yiayia, un restaurant chaleureux à Angoulême offrant une cuisine locale et des spécialités régionales.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary: #B76E4B;
+      --secondary: #F6C28B;
+      --background: #FFF7F0;
+      --text: #3A2D22;
+      --cta: #D95D39;
+      --radius: 12px;
+      --section-pad-mobile: 48px 16px;
+      --section-pad-desktop: 96px 24px;
+      --font-heading: 'Quicksand', sans-serif;
+      --font-body: 'Merriweather', serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--background);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4, h5 {
+      font-family: var(--font-heading);
+      color: var(--text);
+    }
+
+    img { display: block; width: 100%; height: auto; }
+
+    /* ─── NAV ─── */
+    #navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: rgba(255, 247, 240, 0.96);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(183, 110, 75, 0.15);
+      padding: 0 20px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: box-shadow 0.3s ease;
+    }
+    #navbar.scrolled { box-shadow: 0 2px 20px rgba(58,45,34,0.12); }
+
+    .nav-logo {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+    }
+
+    .nav-links {
+      display: none;
+      list-style: none;
+      gap: 28px;
+    }
+    .nav-links a {
+      font-family: var(--font-heading);
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--text);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--primary); }
+
+    .hamburger {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+      background: none;
+      border: none;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 64px; left: 0; right: 0;
+      background: var(--background);
+      z-index: 999;
+      padding: 24px 20px;
+      border-bottom: 1px solid rgba(183,110,75,0.15);
+      flex-direction: column;
+      gap: 20px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: var(--font-heading);
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text);
+      text-decoration: none;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(183,110,75,0.1);
+    }
+    .mobile-menu a:hover { color: var(--primary); }
+
+    @media (min-width: 768px) {
+      .hamburger { display: none; }
+      .nav-links { display: flex; }
+      .mobile-menu { display: none !important; }
+    }
+
+    /* ─── HERO ─── */
+    #hero {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      min-height: 500px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('https://maps.googleapis.com/maps/api/place/photo?maxwidth=1600&photo_reference=Ab43m-teJItM3LsC9FRTVK5UTW82_FCZIpksBzVI4ZzziI42A9FT-5Hom6ln-FyHJn8gp_bcrRz9fS2mxNW7lrLFawBc_SHf7d3lctezLuni6ABx3ed3ecYIQPVvJuWUFG3UfA-xDOpQylXyEUOIkRWkcFTTe7REQllnbjrFPTMXkIPqozYMIGXLCzWgo0DBNCiyg1YBlwm4fj-ERDXDZppXl-4GQ9XnJ4PmIgiCibXNdphGLoYB21iGbowfPmtZjugLvbyPGs6U1KPhfIev0-CyV3xLWmvs-eTNjL3Dbz3njWy5nm7NXO9kRZzY8kTMyO3AKCl6NFqycGArDEmsTEOTPU14gL9A3U4_FUIPMAsh_GLvqC3RL3fH4MUtMe2Wfh13h0sa1fMVrFB_xyIl56tsyptjhbCzo22AZ0L1evBqAuQ&key=AIzaSyCd8_Lzx6EPWwnELP47YrOwKzAMK9CV9fc');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(20, 12, 6, 0.45);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 24px 20px;
+      max-width: 760px;
+      width: 100%;
+    }
+
+    .hero-content h1 {
+      font-family: var(--font-heading);
+      font-size: clamp(1.6rem, 5vw, 3.8rem);
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.15;
+      margin-bottom: 16px;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.35);
+    }
+
+    .hero-content p {
+      font-family: var(--font-body);
+      font-size: clamp(0.95rem, 2.5vw, 1.25rem);
+      color: rgba(255,255,255,0.92);
+      margin-bottom: 32px;
+      font-weight: 300;
+      text-shadow: 0 1px 6px rgba(0,0,0,0.3);
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background: var(--cta);
+      color: #fff;
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 14px 32px;
+      border-radius: var(--radius);
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      max-width: 280px;
+      text-align: center;
+      transition: background 0.25s, transform 0.2s;
+    }
+    .btn-primary:hover { background: #c24d2a; transform: translateY(-2px); }
+
+    .btn-secondary {
+      display: inline-block;
+      background: transparent;
+      color: #fff;
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 13px 32px;
+      border-radius: var(--radius);
+      border: 2px solid rgba(255,255,255,0.8);
+      text-decoration: none;
+      cursor: pointer;
+      width: 100%;
+      max-width: 280px;
+      text-align: center;
+      transition: background 0.25s, color 0.25s, transform 0.2s;
+    }
+    .btn-secondary:hover { background: rgba(255,255,255,0.15); transform: translateY(-2px); }
+
+    @media (min-width: 768px) {
+      .hero-buttons { flex-direction: row; justify-content: center; }
+      .btn-primary, .btn-secondary { width: auto; }
+    }
+
+    /* ─── SECTION BASE ─── */
+    section {
+      padding: var(--section-pad-mobile);
+    }
+    @media (min-width: 768px) {
+      section { padding: var(--section-pad-desktop); }
+    }
+
+    .section-label {
+      font-family: var(--font-heading);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .section-headline {
+      font-family: var(--font-heading);
+      font-size: clamp(1.5rem, 4vw, 2.4rem);
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .section-divider {
+      width: 48px;
+      height: 3px;
+      background: var(--secondary);
+      border-radius: 2px;
+      margin-bottom: 32px;
+    }
+
+    /* ─── ABOUT ─── */
+    #about {
+      background: #fff;
+    }
+
+    .about-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .about-text p {
+      font-size: 0.97rem;
+      line-height: 1.85;
+      color: var(--text);
+      opacity: 0.88;
+    }
+
+    .about-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+    }
+
+    .badge {
+      background: var(--background);
+      border: 1px solid var(--secondary);
+      color: var(--primary);
+      font-family: var(--font-heading);
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: var(--radius);
+    }
+
+    .about-image {
+      border-radius: var(--radius);
+      overflow: hidden;
+      max-height: 400px;
+    }
+    .about-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    @media (min-width: 768px) {
+      .about-inner { grid-template-columns: 1fr 1fr; }
+    }
+
+    /* ─── MENU ─── */
+    #menu {
+      background: var(--background);
+    }
+
+    .menu-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .menu-header { text-align: center; }
+    .menu-header .section-divider { margin: 0 auto 40px; }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    @media (min-width: 600px) {
+      .menu-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (min-width: 1024px) {
+      .menu-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+
+    .menu-card {
+      background: #fff;
+      border-radius: var(--radius);
+      padding: 28px 22px;
+      border: 1px solid rgba(183,110,75,0.12);
+      transition: transform 0.25s, box-shadow 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+    .menu-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+    }
+    .menu-card:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(183,110,75,0.15); }
+
+    .menu-icon {
+      font-size: 2rem;
+      margin-bottom: 14px;
+    }
+
+    .menu-card h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--primary);
+    }
+
+    .menu-card p {
+      font-size: 0.85rem;
+      line-height: 1.7;
+      color: var(--text);
+      opacity: 0.8;
+    }
+
+    /* ─── REVIEWS ─── */
+    #reviews {
+      background: #fff;
+    }
+
+    .reviews-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .reviews-header { text-align: center; }
+    .reviews-header .section-divider { margin: 0 auto 40px; }
+
+    .overall-rating {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 48px;
+      flex-wrap: wrap;
+    }
+
+    .overall-stars { font-size: 1.5rem; color: var(--secondary); }
+    .overall-num {
+      font-family: var(--font-heading);
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+    .overall-count {
+      font-size: 0.85rem;
+      color: var(--text);
+      opacity: 0.65;
+      font-family: var(--font-heading);
+    }
+
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    @media (min-width: 768px) {
+      .reviews-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .review-card {
+      background: var(--background);
+      border-radius: var(--radius);
+      padding: 28px;
+      border: 1px solid rgba(183,110,75,0.1);
+      position: relative;
+    }
+
+    .review-quote {
+      font-size: 3rem;
+      line-height: 1;
+      color: var(--secondary);
+      font-family: Georgia, serif;
+      position: absolute;
+      top: 14px;
+      left: 20px;
+      opacity: 0.5;
+    }
+
+    .review-stars { font-size: 1.1rem; color: var(--secondary); margin-bottom: 12px; }
+
+    .review-text {
+      font-size: 0.9rem;
+      line-height: 1.75;
+      color: var(--text);
+      font-style: italic;
+      margin-bottom: 16px;
+      opacity: 0.88;
+    }
+
+    .review-author {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--primary);
+    }
+
+    /* ─── GALLERY ─── */
+    #gallery {
+      background: var(--background);
+    }
+
+    .gallery-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .gallery-header { text-align: center; margin-bottom: 40px; }
+    .gallery-header .section-divider { margin: 0 auto 16px; }
+    .gallery-caption {
+      font-size: 0.92rem;
+      opacity: 0.7;
+      max-width: 500px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    @media (min-width: 768px) {
+      .gallery-grid { grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    }
+
+    .gallery-item {
+      border-radius: var(--radius);
+      overflow: hidden;
+      aspect-ratio: 4/3;
+      cursor: pointer;
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    .gallery-item:hover img { transform: scale(1.05); }
+
+    /* ─── HOURS & LOCATION ─── */
+    #hours {
+      background: #fff;
+    }
+
+    .hours-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+    @media (min-width: 768px) {
+      .hours-inner { grid-template-columns: 1fr 1fr; }
+    }
+
+    .hours-table { width: 100%; border-collapse: collapse; }
+    .hours-table tr { border-bottom: 1px solid rgba(183,110,75,0.1); }
+    .hours-table tr:last-child { border-bottom: none; }
+    .hours-table td {
+      padding: 12px 4px;
+      font-size: 0.9rem;
+      vertical-align: top;
+    }
+    .hours-table td:first-child {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      color: var(--primary);
+      width: 130px;
+    }
+    .hours-table td:last-child { color: var(--text); opacity: 0.8; }
+    .day-closed { color: #999 !important; font-style: italic; }
+
+    .map-container {
+      border-radius: var(--radius);
+      overflow: hidden;
+      height: 300px;
+    }
+    .map-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .contact-info {
+      margin-top: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .contact-info-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.9rem;
+      color: var(--text);
+      opacity: 0.85;
+    }
+    .contact-info-item .ci-icon {
+      font-size: 1.1rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .contact-info-item a {
+      color: var(--primary);
+      text-decoration: none;
+      font-family: var(--font-heading);
+      font-weight: 600;
+    }
+    .contact-info-item a:hover { text-decoration: underline; }
+
+    /* ─── CONTACT ─── */
+    #contact {
+      background: var(--background);
+    }
+
+    .contact-inner {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .contact-header { text-align: center; }
+    .contact-header .section-divider { margin: 0 auto 16px; }
+
+    .contact-instruction {
+      text-align: center;
+      font-size: 0.95rem;
+      line-height: 1.7;
+      opacity: 0.75;
+      margin-bottom: 40px;
+    }
+
+    .contact-form { display: flex; flex-direction: column; gap: 18px; }
+
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group label {
+      font-family: var(--font-heading);
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1.5px solid rgba(183,110,75,0.25);
+      border-radius: var(--radius);
+      background: #fff;
+      font-family: var(--font-body);
+      font-size: 0.92rem;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.25s;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus { border-color: var(--primary); }
+    .form-group textarea { resize: vertical; min-height: 130px; }
+
+    .form-submit {
+      background: var(--cta);
+      color: #fff;
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 14px 32px;
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      width: 100%;
+      transition: background 0.25s, transform 0.2s;
+    }
+    .form-submit:hover { background: #c24d2a; transform: translateY(-2px); }
+    @media (min-width: 768px) {
+      .form-submit { width: auto; align-self: flex-start; }
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--text);
+      color: rgba(255,255,255,0.85);
+      padding: 48px 20px 32px;
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 36px;
+    }
+    @media (min-width: 768px) {
+      .footer-inner { grid-template-columns: 1fr 1fr 1fr; }
+    }
+
+    .footer-brand .footer-logo {
+      font-family: var(--font-heading);
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--secondary);
+      margin-bottom: 10px;
+    }
+    .footer-brand p {
+      font-size: 0.85rem;
+      line-height: 1.7;
+      opacity: 0.7;
+    }
+
+    .footer-col h4 {
+      font-family: var(--font-heading);
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--secondary);
+      margin-bottom: 14px;
+    }
+    .footer-col p, .footer-col a {
+      font-size: 0.85rem;
+      line-height: 1.8;
+      opacity: 0.75;
+      color: rgba(255,255,255,0.85);
+      text-decoration: none;
+      display: block;
+    }
+    .footer-col a:hover { opacity: 1; color: var(--secondary); }
+
+    .rating-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(246,194,139,0.25);
+      padding: 10px 16px;
+      border-radius: var(--radius);
+      margin-top: 12px;
+    }
+    .rating-badge .stars { color: var(--secondary); font-size: 0.95rem; }
+    .rating-badge .num {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 1rem;
+      color: #fff;
+    }
+    .rating-badge .count { font-size: 0.78rem; opacity: 0.65; }
+
+    .footer-bottom {
+      max-width: 1100px;
+      margin: 32px auto 0;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      text-align: center;
+      font-size: 0.78rem;
+      opacity: 0.45;
+      font-family: var(--font-heading);
+    }
+
+    /* ─── ANIMATIONS ─── */
+    .fade-in {
+      opacity: 0;
+      transition: opacity 0.6s ease;
+    }
+    .fade-in.visible { opacity: 1; }
+
+    /* ─── LIGHTBOX ─── */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.9);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox img {
+      max-width: 100%;
+      max-height: 90vh;
+      object-fit: contain;
+      border-radius: var(--radius);
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 20px; right: 20px;
+      background: rgba(255,255,255,0.15);
+      border: none;
+      color: #fff;
+      font-size: 1.5rem;
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+    .lightbox-close:hover { background: rgba(255,255,255,0.3); }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">yiayia</a>
+  <ul class="nav-links">
+    <li><a href="#about">À propos</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#reviews">Avis</a></li>
+    <li><a href="#gallery">Galerie</a></li>
+    <li><a href="#hours">Horaires</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" class="mobile-link">À propos</a>
+  <a href="#menu" class="mobile-link">Menu</a>
+  <a href="#reviews" class="mobile-link">Avis</a>
+  <a href="#gallery" class="mobile-link">Galerie</a>
+  <a href="#hours" class="mobile-link">Horaires</a>
+  <a href="#contact" class="mobile-link">Contact</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <h1>Découvrez la gastronomie française</h1>
+    <p>Un lieu convivial au cœur d'Angoulême</p>
+    <div class="hero-buttons">
+      <a href="#contact" class="btn-primary">Réserver une table</a>
+      <a href="#menu" class="btn-secondary">Voir le menu</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-inner">
+    <div class="about-text fade-in">
+      <span class="section-label">Notre histoire</span>
+      <h2 class="section-headline">À propos de yiayia</h2>
+      <div class="section-divider"></div>
+      <p>Bienvenue chez yiayia, votre restaurant chaleureux et accueillant situé au cœur d'Angoulême. Nous sommes fiers de vous offrir une expérience culinaire authentique avec une cuisine locale et des spécialités régionales. Notre restaurant est accessible à tous, avec une entrée, des toilettes et des sièges adaptés aux fauteuils roulants. Profitez d'une atmosphère à la fois casual, cosy, romantique et tendance, idéale pour les groupes et les touristes. Que ce soit pour le petit-déjeuner, le déjeuner ou le dîner, nous vous proposons une variété d'options, y compris des plats végétariens et sains. Nous acceptons les réservations pour garantir votre place dans notre espace convivial.</p>
+      <div class="about-badges">
+        <span class="badge">🌿 Cuisine locale</span>
+        <span class="badge">♿ Accessible</span>
+        <span class="badge">🥗 Végétarien</span>
+        <span class="badge">🍽️ Réservations</span>
+        <span class="badge">🌍 Touristes</span>
+      </div>
+    </div>
+    <div class="about-image fade-in">
+      <img src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=1600&photo_reference=Ab43m-sxYW9y5N7mCcmlv4TBD0zXsTJ-mGQaQUIwVzKWGXK-kLuPWvvcLOt2EMkqPfwUH136bzAyVRiNR-ba4Xi8c-56zpiaIufoO4-G8PdE_24bSQyM-km5dDxkxf2_tataDCX1z8dv9KA0yrRmmE-R6xpNKam7CheF0G3Tn6R5QdG-rkPU97q9SIas1b058U5V5olNvyNHgZhyDwzQStFyPDG_laQDlxA9wnJm05M1lWvviKBIn6NgHmYWV0EKTO105it0a_J3bXn5OmqqO5sdwkWZ47YKiomeI_jflXhCTQZqbNruO5nX9NDRFC2edtn1xsPnVms_U1FIA8g2zBXX0-MCPBYeeoPrPNstFrtX50qRITAhfm95BR1goRlQX3ncIfEpKRwJatVDDSzmm27NF3WIHTNS9A409AdY1HcAWQ1Sey_6YmFiL2B7QOSQ1zGQ&key=AIzaSyCd8_Lzx6EPWwnELP47YrOwKzAMK9CV9fc" alt="Intérieur de yiayia restaurant à Angoulême" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section id="menu">
+  <div class="menu-inner">
+    <div class="menu-header fade-in">
+      <span class="section-label">À la carte</span>
+      <h2 class="section-headline">Nos spécialités</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="menu-grid">
+      <div class="menu-card fade-in">
+        <div class="menu-icon">🍹</div>
+        <h3>Cocktails exquis</h3>
+        <p>Savourez nos cocktails raffinés, parfaits pour accompagner votre repas.</p>
+      </div>
+      <div class="menu-card fade-in">
+        <div class="menu-icon">☕</div>
+        <h3>Café de qualité</h3>
+        <p>Dégustez notre café exceptionnel, idéal pour une pause gourmande.</p>
+      </div>
+      <div class="menu-card fade-in">
+        <div class="menu-icon">🍮</div>
+        <h3>Desserts délicieux</h3>
+        <p>Terminez votre repas en beauté avec nos desserts faits maison.</p>
+      </div>
+      <div class="menu-card fade-in">
+        <div class="menu-icon">🍷</div>
+        <h3>Sélection de vins</h3>
+        <p>Découvrez notre carte des vins soigneusement sélectionnée pour sublimer vos plats.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews">
+  <div class="reviews-inner">
+    <div class="reviews-header fade-in">
+      <span class="section-label">Témoignages</span>
+      <h2 class="section-headline">Avis clients</h2>
+      <div class="section-divider"></div>
+      <div class="overall-rating">
+        <span class="overall-stars">★★★★★</span>
+        <span class="overall-num">4.8</span>
+        <span class="overall-count">sur 430 avis Google</span>
+      </div>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card fade-in">
+        <div class="review-quote">"</div>
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">Un lieu vraiment sympa. Le menu du midi est vraiment chouette avec du choix et bien exécuté. Le service au top. On a passé un très bon moment avec nos enfants ! On reviendra.</p>
+        <span class="review-author">— Cerise</span>
+      </div>
+      <div class="review-card fade-in">
+        <div class="review-quote">"</div>
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">Repas très agréable et délicieux. Le service est impeccable et avenant. Je recommande Dîner en terrasse.</p>
+        <span class="review-author">— Mitch</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="gallery-inner">
+    <div class="gallery-header fade-in">
+      <span class="section-label">Photos</span>
+      <h2 class="section-headline">Galerie</h2>
+      <div class="section-divider"></div>
+      <p class="gallery-caption">Découvrez l'ambiance chaleureuse de notre restaurant à travers nos photos authentiques.</p>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item fade-in" onclick="openLightbox(this)">
+        <img src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=1600&photo_reference=Ab43m-sxYW9y5N7mCcmlv4TBD0zXsTJ-mGQaQUIwVzKWGXK-kLuPWvvcLOt2EMkqPfwUH136bzAyVRiNR-ba4Xi8c-56zpiaIufoO4-G8PdE_24bSQyM-km5dDxkxf2_tataDCX1z8dv9KA0yrRmmE-R6xpNKam7CheF0G3Tn6R5QdG-rkPU97q9SIas1b058U5V5olNvyNHgZhyDwzQStFyPDG_laQDlxA9wnJm05M1lWvviKBIn6NgHmYWV0EKTO105it0a_J3bXn5OmqqO5sdwkWZ47YKiomeI_jflXhCTQZqbNruO5nX9NDRFC2edtn1xsPnVms_U1FIA8g2zBXX0-MCPBYeeoPrPNstFrtX50qRITAhfm95BR1goRlQX3ncIfEpKRwJatVDDSzmm27NF3WIHTNS9A409AdY1HcAWQ1Sey_6YmFiL2B7QOSQ1zGQ&key=AIzaSyCd8_Lzx6EPWwnELP47YrOwKzAMK9CV9fc" alt="Ambiance yiayia" loading="lazy">
+      </div>
+      <div class="gallery-item fade-in" onclick="openLightbox(this)">
+        <img src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=1600&photo_reference=Ab43m-vbq1TkQIp9KHKFdJVzfqvndBq10Q8U6gaD1k8o3ies3-CL43xzxKlI3NBEAhV3qAfTOS_lWTxTqDw2dVjsr6bNdNYoc7TLOeHpwILMAiWuIVCQsDeWRhLPOuA8o7wEZFnkKLP_DrGgmJEonYKE3it7E-T-M1Qvd3Wz7neKxHxjWb5GAqO2TNt0fYnRDmcDCjePBXBN1tD9f2F2W478WetzKsUDCdZhWaofgX2gl3p5XUgpniLoToTJKSfG1VHUu9NhjEZhFOpLbBYl12qgOGtyVQk6RZUXrpuGJNVVw5oQnvh0mUG58aV_Lvo_dGahc6QHTmlxuVYirteOxbHwfTo06b7QJOC-z86R3Baa_feEDMev8tG7-wBwifaLlbkKThe4jpnjRF7eaM_TgzLJuVqk0f6StVwQOJEkHCqFrsuUambt_UuFb_CM43hts552&key=AIzaSyCd8_Lzx6EPWwnELP47YrOwKzAMK9CV9fc" alt="Plat yiayia" loading="lazy">
+      </div>
+      <div class="gallery-item fade-in" onclick="openLightbox(this)">
+        <img src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=1600&photo_reference=Ab43m-shcyy4WqAvY0QLn_6WWdIGKYXMaNOskhHKOeSNmI2CDYWgmnSyByKoJZ1tNvtQ9dC8PkNrRFloF37_7f4kgAUUUBaf1YrStEyMNMoRc5BJ_Fbkkf30fpe8g97buhOtVMXlc2lt_T7rWH5nuOrPbbZAdmPLVOUcRpnPRsl889PeXNXon-AK1S4uoGAYf3Wr8h6cnRue-W0YYiaGo3A68GUJSFZOnBO6VCuWJFzTEynDWyiQUCt7g_h-xmleq3wvr2Gfu60alQFs_UAEC2l-YGxcZKTF1DpD6SN-hvKk9q8cgtfhE70XqttmvZNK-d6TFq4Q41_ecKKkmc6GXMNVxWKvFx5HaHIttbN-Ts5PkxhKUoWL4F_YtCD6nPXb6DUEixEhJAcTlg6bzDZUSWlkQgNhrcmeL3A1aXnHgXHOVcY2SrYBTVowRLdK2V4ZTw&key=AIzaSyCd8_Lzx6EPWwnELP47YrOwKzAMK9CV9fc" alt="Intérieur yiayia" loading="lazy">
+      </div>
+      <div class="gallery-item fade-in" onclick="openLightbox(this)">
+        <img src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=1600&photo_reference=Ab43m-shwSlsQLMxhL0EDm16m9_enp0ydivSy9JtzKUchfUx33zxwflgn0j_EnA65IGeK5fR9k_0BE1BDcyQkBridV_1qLQD1o73UrPEQvUC-Emb8MzRQC9j4FGahP_KAJGJ4VElgj9ennn-UWDH1vFYXIcYTN2kMwXgt5qLLYqpV0WTtFCVzxwdXfGdDheUMbRGFbIowQUIfsy60VwruMFopJ6HJLDC5w7uIp-4KXlP1WXNtHQQSjFw6uKqkWqdk9ZHK_sM7EUL--O818rMZdvoSQxkSBxa5rYtXBfF0rYfZ0_M4tPhjCt1DyqbHAdFyUyN1kjcUcSyYGXq7OTg0j52y-iBpV9n7h5YoFTw1DlSeBvKa-z3GY2QpVUVHR-SV9fGCSk7Et4zYjWebk4rGe8NthokkGIlx6RYWdqFn-akChw_LBo&key=AIzaSyCd8_Lzx6EPWwnELP47YrOwKzAMK9CV9fc" alt="Décor yiayia" loading="lazy">
+      </div>
+      <div class="gallery-item fade-in" onclick="openLightbox(this)">
+        <img src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=1600&photo_reference=Ab43m-vXZUql8rFS7HEM_B7it9cPEEOeqlDWAZSUnxN5Qrab2WPDqP2fWNzOwTQD8L4SXby272JQchDO2pkjR8kw-ZGvbV8ajhGCR9OtN8v_e543NSvs0Y0N3p_IDsBb-r5MwtxUOLYEudcLk-ERBExLshy4tx7V4hH48QpU1-tlrVOuMew61_nfbhrfN616UMHs2g7E6gMNIiBfrGoa6OgSAYOrQmGH9el8mgMHK6ruj8eLRyZYl1hF_rjypLP91lG7feE73Z1nyQS7vkSV-YytTL-Iby8uicvAv75v2oYV78DmcRd26Z0-Mx9MpbB5rZCwxOO1LVfnwRYD95aI-VNlbskbOZD6IaClSw3drLCpRxaA9VhdSMKCRbcF5P-K6I9ASaRM_KnujM5xwyqlbKsdtH-coc6f16ZTBboBn9YVf-STLAMA2WF0XSZNqTMSJg&key=AIzaSyCd8_Lzx6EPWwnELP47YrOwKzAMK9CV9fc" alt="Repas yiayia" loading="lazy">
+      </div>
+      <div class="gallery-item fade-in" onclick="openLightbox(this)">
+        <img src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=1600&photo_reference=Ab43m-teJItM3LsC9FRTVK5UTW82_FCZIpksBzVI4ZzziI42A9FT-5Hom6ln-FyHJn8gp_bcrRz9fS2mxNW7lrLFawBc_SHf7d3lctezLuni6ABx3ed3ecYIQPVvJuWUFG3UfA-xDOpQylXyEUOIkRWkcFTTe7REQllnbjrFPTMXkIPqozYMIGXLCzWgo0DBNCiyg1YBlwm4fj-ERDXDZppXl-4GQ9XnJ4PmIgiCibXNdphGLoYB21iGbowfPmtZjugLvbyPGs6U1KPhfIev0-CyV3xLWmvs-eTNjL3Dbz3njWy5nm7NXO9kRZzY8kTMyO3AKCl6NFqycGArDEmsTEOTPU14gL9A3U4_FUIPMAsh_GLvqC3RL3fH4MUtMe2Wfh13h0sa1fMVrFB_xyIl56tsyptjhbCzo22AZ0L1evBqAuQ&key=AIzaSyCd8_Lzx6EPWwnELP47YrOwKzAMK9CV9fc" alt="Restaurant yiayia" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOURS & LOCATION -->
+<section id="hours">
+  <div class="hours-inner">
+    <div class="fade-in">
+      <span class="section-label">Infos pratiques</span>
+      <h2 class="section-headline">Horaires & Adresse</h2>
+      <div class="section-divider"></div>
+      <table class="hours-table">
+        <tbody>
+          <tr>
+            <td>Lundi</td>
+            <td class="day-closed">Fermé</td>
+          </tr>
+          <tr>
+            <td>Mardi</td>
+            <td>12-2PM · 7-11PM</td>
+          </tr>
+          <tr>
+            <td>Mercredi</td>
+            <td>12-2PM · 7-11PM</td>
+          </tr>
+          <tr>
+            <td>Jeudi</td>
+            <td>12-2PM · 7-11PM</td>
+          </tr>
+          <tr>
+            <td>Vendredi</td>
+            <td>12-2PM · 7-11PM</td>
+          </tr>
+          <tr>
+            <td>Samedi</td>
+            <td>12-2PM · 7-11PM</td>
+          </tr>
+          <tr>
+            <td>Dimanche</td>
+            <td class="day-closed">Fermé</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="contact-info">
+        <div class="contact-info-item">
+          <span class="ci-icon">📍</span>
+          <span>1 Rue des 3 Notre Dame 16000 Angoulême France</span>
+        </div>
+        <div class="contact-info-item">
+          <span class="ci-icon">📞</span>
+          <a href="tel:+33516162582">+33 5 16 16 25 82</a>
+        </div>
+        <div class="contact-info-item">
+          <span class="ci-icon">🗺️</span>
+          <a href="https://maps.google.com/?q=45.650022899999996,0.15556799999999998" target="_blank" rel="noopener">Ouvrir dans Google Maps</a>
+        </div>
+      </div>
+    </div>
+    <div class="fade-in">
+      <div class="map-container">
+        <iframe
+          src="https://maps.google.com/maps?q=45.650022899999996,0.15556799999999998&z=16&output=embed"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Localisation yiayia Angoulême">
+        </iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="contact-header fade-in">
+      <span class="section-label">Écrivez-nous</span>
+      <h2 class="section-headline">Contactez-nous</h2>
+      <div class="section-divider"></div>
+      <p class="contact-instruction">Pour toute question, n'hésitez pas à nous appeler ou à nous rendre visite.</p>
+    </div>
+    <form class="contact-form fade-in" action="#" method="POST">
+      <div class="form-group">
+        <label for="name">Nom complet</label>
+        <input type="text" id="name" name="name" placeholder="Votre nom" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Adresse e-mail</label>
+        <input type="email" id="email" name="email" placeholder="votre@email.com" required>
+      </div>
+      <div class="form-group">
+        <label for="phone">Téléphone (optionnel)</label>
+        <input type="tel" id="phone" name="phone" placeholder="+33 ...">
+      </div>
+      <div class="form-group">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" placeholder="Votre message ou demande de réservation..." required></textarea>
+      </div>
+      <button type="submit" class="form-submit">Envoyer le message</button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-logo">yiayia</div>
+      <p>Restaurant chaleureux au cœur d'Angoulême. Cuisine locale et spécialités régionales.</p>
+      <div class="rating-badge">
+        <span class="stars">★★★★★</span>
+        <span class="num">4.8</span>
+        <span class="count">430 avis</span>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <p>1 Rue des 3 Notre Dame</p>
+      <p>16000 Angoulême, France</p>
+      <a href="tel:+33516162582">+33 5 16 16 25 82</a>
+      <a href="https://maps.google.com/?q=45.650022899999996,0.15556799999999998" target="_blank" rel="noopener" style="margin-top:8px;">Voir sur Google Maps →</a>
+    </div>
+    <div class="footer-col">
+      <h4>Horaires</h4>
+      <p>Mardi – Vendredi</p>
+      <p>12h–14h · 19h–23h</p>
+      <p style="margin-top:8px;">Samedi</p>
+      <p>12h–14h · 19h–23h</p>
+      <p style="margin-top:8px; color: rgba(255,255,255,0.4);">Lundi & Dimanche : Fermé</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2024 yiayia — Restaurant Angoulême. Tous droits réservés.</p>
+  </div>
+</footer>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <img id="lightboxImg" src="" alt="Photo yiayia">
+</div>
+
+<script>
+  // NAV scroll effect
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // Hamburger
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+  });
+
+  // Close mobile menu on link click
+  document.querySelectorAll('.mobile-link').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+    });
+  });
+
+  // Intersection Observer for fade-in
+  const fadeEls = document.querySelectorAll('.fade-in');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  fadeEls.forEach(el => observer.observe(el));
+
+  // Lightbox
+  function openLightbox(el) {
+    const img = el.querySelector('img');
+    document.getElementById('lightboxImg').src = img.src;
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeLightbox();
+  });
+
+  // Form submit
+  const form = document.querySelector('.contact-form');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const btn = form.querySelector('.form-submit');
+    btn.textContent = 'Message envoyé ✓';
+    btn.style.background = '#3a7d44';
+    setTimeout(() => {
+      btn.textContent = 'Envoyer le message';
+      btn.style.background = '';
+      form.reset();
+    }, 3000);
+  });
+</script>
+</body>
+</html>
